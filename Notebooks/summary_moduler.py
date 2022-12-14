@@ -35,8 +35,8 @@ BATCH_SIZE = 8
 class SummaryDataset(Dataset):
     def __init__(
         self,
-        data: pd.DataFrame,
-        tokenizer: T5Tokenizer,
+        data: pd.DataFrame = None,
+        tokenizer: T5Tokenizer = None,
         title_max_token_len: int = 512,
         content_max_token_len: int = 128
     ):
@@ -90,10 +90,6 @@ class SummaryDataset(Dataset):
 class SummaryDataModule(pl.LightningDataModule):
     def __init__(
         self,
-        #X_train: pd.DataFrame,
-        #y_train: pd.DataFrame,
-        #X_test: pd.DataFrame,
-        #y_test: pd.DataFrame,
         train_df: pd.DataFrame,
         test_df: pd.DataFrame,
         tokenizer: T5Tokenizer,
@@ -102,16 +98,10 @@ class SummaryDataModule(pl.LightningDataModule):
         content_max_token_len: int = 128
     ):
         super().__init__()
-        #self.X_train = X_train
-        #self.y_train = y_train
-        #self.X_test = X_test
-        #self.y_test = y_test
         self.tokenizer = tokenizer
         self.batch_size = batch_size
         self.title_max_token_len = title_max_token_len
         self.content_max_token_len = content_max_token_len
-        #self.train_df = pd.DataFrame({self.X_train.name: self.X_train, self.y_train.name: self.y_train})
-        #self.test_df = pd.DataFrame({self.X_test.name: self.X_test, self.y_test.name: self.y_test})
         self.train_df = train_df
         self.test_df = test_df
 
